@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<title>Test Zadatak 2</title>
+	<link href="style.css" rel="stylesheet" type="text/css">
+</head>
+<body onload="generateTable();">
+<div id="tableDiv">
+	<form id="formId">
+		<table id="dataTable"></table>
+	</form>
+</div>
+</body>
+<script type="text/javascript" languaje="javascript">
+
+function generateTable(){
+	
+	var id = 0; //This variable will be used to generate unique ids for each row;
+	
+	var dataTable = document.getElementById("dataTable");
+	
+	//Make header row
+	var headerRow = document.createElement("tr");
+	
+	var columnId = document.createElement("th");
+		columnId.innerHTML = "Id";
+
+	var columnName = document.createElement("th");
+		columnName.innerHTML = "Name";
+
+	var columnEmail = document.createElement("th");
+		columnEmail.innerHTML = "Email";
+		
+	headerRow.appendChild(columnId);
+	headerRow.appendChild(columnName);
+	headerRow.appendChild(columnEmail);
+	
+	//Append header row to the table body
+	dataTable.appendChild(headerRow);
+	
+	//Populate the table with dummy data.
+	for(var i = 0; i < 10; i++){
+	
+		var tableRow = document.createElement("tr");
+			tableRow.id = 'tableRow_'+id;
+			
+		var newId = document.createElement("td");
+			id++;
+			newId.innerHTML = id;
+
+		var newName = document.createElement("td");
+			newName.innerHTML = "Name"+(i+1);
+
+		var newEmail = document.createElement("td"),
+			emailLink = document.createElement("a"); //Adding anchor element
+			emailLink.href="mailto:"+"Name"+(i+1)+"@bicomsystems.com"; //Applying mailto link
+			emailLink.innerHTML = "Name"+(i+1)+"@bicomsystems.com";
+			newEmail.appendChild(emailLink);
+
+		tableRow.appendChild(newId);
+		tableRow.appendChild(newName);
+		tableRow.appendChild(newEmail);
+		dataTable.appendChild(tableRow);
+		
+		//Make the color of the row yellow when hovering with mouse and save previos css
+		document.getElementById("tableRow_"+i).onmouseover=function(){
+			this.oldBackgroundColor=this.style.backgroundColor;
+			this.style.backgroundColor='yellow';
+		};
+		
+		//When mouse leaves, bring back old css
+		document.getElementById("tableRow_"+i).onmouseout=function(){
+			this.style.backgroundColor=this.oldBackgroundColor;
+		};	
+	}
+}
+
+</script>
+
+</html>
